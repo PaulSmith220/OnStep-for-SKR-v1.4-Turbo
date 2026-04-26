@@ -93,6 +93,11 @@
   // Arduino Due
   #define MCU_STR "SAM3X8E (Arduino DUE)"
   #include "Due/Due.h"  
+
+#elif defined(__LPC1769__) || defined(LPC1769) || defined(TARGET_LPC1769) || defined(ARDUINO_ARCH_LPC176X)
+  // BigTreeTech SKR v1.4 Turbo, LPC1769, 120MHz ARM Cortex-M3
+  #define MCU_STR "LPC1769"
+  #include "LPC176x/LPC176x.h"
   
 #else
   #error "Unsupported Platform! If this is a new platform, it needs the appropriate entries in the HAL directory."

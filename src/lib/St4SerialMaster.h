@@ -24,6 +24,14 @@ all others (Teensy3.x, etc.) at 2mS/byte (500 Bps.)
 
 #include "Stream.h"
 
+#if defined(ARDUINO_ARCH_LPC176X)
+  #define ST4_AVAILABLE_RETURN size_t
+  #define ST4_READ_RETURN int16_t
+#else
+  #define ST4_AVAILABLE_RETURN int
+  #define ST4_READ_RETURN int
+#endif
+
 class Mst4 : public Stream
 {
   public:
@@ -49,9 +57,9 @@ class Mst4 : public Stream
     
     virtual size_t write(uint8_t);
     virtual size_t write(const uint8_t *, size_t);
-    virtual int available(void);
-    virtual int read(void);
-    virtual int peek(void);
+    virtual ST4_AVAILABLE_RETURN available(void);
+    virtual ST4_READ_RETURN read(void);
+    virtual ST4_READ_RETURN peek(void);
     virtual void flush(void);
 
     inline size_t write(unsigned long n) { return write((uint8_t)n); }
@@ -178,19 +186,19 @@ size_t Mst4::write(const uint8_t *data, size_t quantity) {
   return 1;
 }
 
-int Mst4::available(void) {
+ST4_AVAILABLE_RETURN Mst4::available(void) {
   int a=0;
   for (byte b=_recv_head; _recv_buffer[b] != (char)0; b++) a++;
   return a;
 }
 
-int Mst4::read(void) {
+ST4_READ_RETURN Mst4::read(void) {
   char c=_recv_buffer[_recv_head]; if (c != 0) _recv_head++;
   if (c == 0) c=-1;
   return c;
 }
 
-int Mst4::peek(void) {
+ST4_READ_RETURN Mst4::peek(void) {
   int c=_recv_buffer[_recv_head];
   if (c == 0) c=-1;
 

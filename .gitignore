@@ -15,6 +15,7 @@
 *.exe
 *.out
 *.app
+.pio/
 
 # Visual studio
 *.vcxproj

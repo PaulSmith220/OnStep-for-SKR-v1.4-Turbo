@@ -71,6 +71,9 @@
 #if PINMAP == InsteinESP1
   #include "Validate.InsteinESP1.h"
 #endif
+#if PINMAP == BTT_SKR14_TURBO
+  #include "Validate.BTT_SKR14_Turbo.h"
+#endif
 
 // GENERAL PURPOSE PINMAP VALIDATION ---------------
 

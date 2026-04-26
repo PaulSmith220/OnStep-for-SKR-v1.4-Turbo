@@ -93,3 +93,7 @@
   #define PINMAP_STR "Instein (ESP32)"
   #include "Pins.InsteinESP1.h"
 #endif
+#if PINMAP == BTT_SKR14_TURBO
+  #define PINMAP_STR "BTT SKR v1.4 Turbo"
+  #include "Pins.BTT_SKR14_Turbo.h"
+#endif
